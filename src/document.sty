@@ -1,0 +1,210 @@
+\ProvidesPackage{document}
+
+
+% Requirements
+\RequireXeTeX{}
+
+
+% References
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalise, noabbrev]{cleveref}
+% Use:
+%   \Cref{} -- at the start of a sentence
+%   \cref{} -- not at the start of a sentence
+% Prefixes:
+% apdx:   Appendix
+% chap:   Chapter
+% sec:    Section
+% subsec: Subsection
+% eq:     Equation
+% alg:    Algorithm
+% lst:    Code Listing
+% fig:    Figure
+% tab:    Table
+% enum:   Enumeration
+% fn:     Footnote
+
+% Math
+\usepackage{amsmath}
+
+
+% Graphics
+\usepackage{xargs}
+\usepackage[dvips]{graphicx}
+\usepackage[dvips]{color}
+\usepackage[dvipsnames]{xcolor}
+
+
+% Fonts
+\usepackage{xltxtra}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\setmainfont{TeX Gyre Pagella}  % Palatino clone
+\setmonofont[
+   Numbers =,
+   Scale = 0.8,
+   Extension = .otf,
+   WordSpace = {1,0,0},
+   PunctuationSpace = WordSpace,
+   UprightFont =*-Regular,
+   ItalicFont =*-RegularIt,
+   BoldFont=*-Bold,
+   BoldItalicFont=*-BoldIt
+ ]{SourceCodePro}
+
+
+% Math Symbols
+\usepackage{mathabx}
+
+
+% Code
+\usepackage{microtype}
+%% Minted
+\usepackage[outputdir=../out]{minted}
+% \makeatletter
+% \expandafter\def\csname PYGdefault@tok@err\endcsname{\def\PYGdefault@bc##1{{\strut ##1}}}
+% \makeatother
+\usemintedstyle{trac}
+\setmintedinline{breaklines}
+
+
+%% Listings
+\usepackage{listings}           % \lstinline
+\lstset{
+  breaklines=false,%true,
+  basicstyle=\normalsize\ttfamily,
+}
+% Special command that allows \- to be used, which causes a keyword
+% to be broken there, with a hypen inserted. E.g. \lstinlineb{Hello\-World}.
+% Source: https://jevopi.blogspot.nl/2010/04/latex-lstinline-and-hyphenations.html
+%\newcommand{\lstinlineb}[1]{\lstinline[breaklines=true,mathescape,literate={\-}{}{0\discretionary{-}{}{}}]§#1§}
+% Source: https://tex.stackexchange.com/a/168532/108670
+\lstdefinestyle{Inline}
+{
+    breaklines=false, % If true, some hyphens disappear
+    literate={\\-}{}{0\discretionary{-}{}{}}  % Use \- to insert an optional hyphen
+}
+\newcommand{\lstinlineb}{\lstinline[style=Inline]}
+%\newcommand{\lstinlineb}[1]{\texttt{#1}}
+
+% Quotes
+\usepackage{csquotes} % Usage: \enquote{This is a \textelp{} quote!}
+
+
+% Tables
+\usepackage{booktabs}
+\usepackage{tabularx}
+\newcommand*{\tid}{\hspace*{0.2cm}}%
+
+\newenvironment{textalign}
+  {\par\noindent
+   \begin{tabular}{@{}r@{}l@{}}}
+  {\end{tabular}\par}
+
+\newenvironment{textalign*}
+  {\par\noindent
+   \tabularx{\columnwidth}{@{}r@{}l@{} >{\raggedright\arraybackslash}X}}
+  {\endtabularx\par}
+
+
+% Thesis Layout
+\usepackage{mscthesis}
+
+
+% Figures
+\usepackage{wrapfig}
+
+
+% Todo's and Notes
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+\newcommand\fixme[1]{\textcolor{red}{#1}}
+
+
+% Citation Needed
+%\newcommand{\todocite}{\ensuremath{^\texttt{\textbf [CITATION~NEEDED]}}}
+
+
+% Correct margins
+\setlrmarginsandblock{3cm}{2.5cm}{*}
+\setulmarginsandblock{2.5cm}{2.5cm}{*}
+\checkandfixthelayout{}
+
+
+% Filled circles
+% http://tex.stackexchange.com/a/86099/108670
+\usepackage{tikz}
+\newcommand{\pnone}{%
+\begin{tikzpicture}
+ \draw (0,0) circle (1ex);
+\end{tikzpicture}%
+}
+\newcommand{\pmayb}{%
+\begin{tikzpicture}
+ \draw (0,0) circle (1ex);
+ \fill (1ex,0) arc (0:-180:1ex) -- (0,0) -- cycle;
+\end{tikzpicture}%
+}
+\newcommand{\pyess}{%
+\begin{tikzpicture}
+ \draw[fill=black] (0,0) circle (1ex);
+\end{tikzpicture}%
+}
+
+
+% Words
+\newcommand{\Csharp}{C$^\sharp$}%
+\newcommand{\Cplusplus}{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\textbf ++}}}%
+\newcommand{\dotnet}{.NET}
+\newcommand{\VS}{Visual~Studio}
+\newcommand{\NP}{Notepad++}
+\newcommand{\Sublime}{Sublime}
+\newcommand{\Vim}{Vim}
+\newcommand{\Eclipse}{Eclipse}
+\newcommand{\IntelliJ}{IntelliJ}
+\newcommand{\VSCode}{VS~Code}
+\newcommand{\Atom}{Atom}
+\newcommand{\Cloud}{Cloud9}
+\newcommand{\Che}{Eclipse~Che}
+\newcommand{\Xtext}{Xtext}
+
+
+% Bibliography
+\usepackage[
+  backend=biber,
+  style=authoryear
+]{biblatex}
+
+
+% UML
+\usepackage{tikz-uml}
+
+
+% Continuous counter
+\usepackage{xassoccnt}
+\DeclareCoupledCountersGroup{figtheoexadef}
+\DeclareCoupledCounters[name=figtheoexadef]{figure,table}
+
+
+% Table of Contents
+\setcounter{tocdepth}{1}
+\setsecnumdepth{subsection}
+\maxsecnumdepth{subsection}
+
+
+% Menukeys
+% NOTE: Clashes with \usepackage[colorlinks]{hyperref}, which we don't currently use.
+\usepackage[os=win]{menukeys}
+% See the documentation at:
+% http://ftp.snt.utwente.nl/pub/software/tex/macros/latex/contrib/menukeys/menukeys.pdf
+
+
+% Acronyms
+\usepackage{acronym}
+% Define acronyms in acronyms.tex
+

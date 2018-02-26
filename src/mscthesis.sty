@@ -1,0 +1,163 @@
+
+
+%---------------------------------------------------------------------%
+%                     Define header and footer                        %    
+%---------------------------------------------------------------------%
+\addtolength{\headwidth}{0.5\marginparwidth}
+\renewcommand{\chaptermark}[1]{\markboth{\textit{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\textit{\thesection{} #1}}}
+\pagestyle{ruled}
+
+%---------------------------------------------------------------------%
+%                     Chapter headings                                %    
+%---------------------------------------------------------------------%
+\renewcommand{\printchaptertitle}[1]{\raggedleft{\textbf{\Huge{#1}}}}
+
+\renewcommand{\printchapternonum}{%
+  \raggedleft\phantom{\textbf{\Huge{Chapter}}}\vskip 5pt
+  \vskip\onelineskip\hrule\vskip\onelineskip
+}
+
+\renewcommand{\afterchapternum}{\vskip\onelineskip\hrule\vskip\onelineskip}%
+
+%---------------------------------------------------------------------%
+%                     Define new variables                            %    
+%---------------------------------------------------------------------%
+
+\gdef\theauthor{\@author}
+\gdef\@colophon{\copyright \the\year \: \theauthor. All rights reserved.}
+
+\gdef\@subtitle{please define subtitle}
+\gdef\@authoremail{please define authoremail}
+\gdef\@university{please define university}
+\gdef\@birthplace{please define birthplace}
+\gdef\@studentid{please define studentid}
+
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\authoremail#1{\gdef\@authoremail{#1}}
+\def\university#1{\gdef\@university{#1}}
+\def\company#1{\gdef\@company{#1}\company@definedtrue}
+\def\birthplace#1{\gdef\@birthplace{#1}}
+\def\studentid#1{\gdef\@studentid{#1}}
+
+\def\colophon#1{\gdef\@colophon{#1}}
+
+\def\coverpicture#1{\gdef\@coverpicture{#1}\cover@picturetrue}
+
+% New if construct:             Default condition:
+\newif\ifcover@picture          \cover@picturefalse
+\newif\ifcompany@defined        \company@definedfalse
+
+\university{%
+\hskip-10pt{\includegraphics[height=2cm]{img/tudelft_logo_bw.eps}}\\[-8pt]
+Programming Languages Group \\
+Department of Software Technology \\
+Faculty EEMCS, Delft University of Technology \\
+Delft, the Netherlands \\
+\url{www.ewi.tudelft.nl}
+}
+
+%---------------------------------------------------------------------%
+%                     Title page                                      %    
+%---------------------------------------------------------------------%
+
+\date{}
+
+\pretitle{\begin{center}\Huge}
+\posttitle{%
+  \par
+  \rule{\textwidth}{4pt}\par\textit{\Large{\@subtitle}}
+  \par
+  \vfill
+  \ifcover@picture
+     \@coverpicture
+  \fi
+  \vfill
+  \end{center}}
+\preauthor{\begin{flushright}\begingroup\Large}
+\postauthor{\endgroup\end{flushright}\vskip 1em}
+\predate{\begingroup}
+\postdate{\endgroup\cleardoublepage}
+
+
+%-------------------------------------------------------------------%
+%                       Formal Title Pages                          %
+%-------------------------------------------------------------------%
+\def\@REPTYPE{MASTER OF SCIENCE}
+\def\@MAJOR{COMPUTER SCIENCE}
+
+\def\makeformaltitlepages#1{%
+\begingroup\newpage
+\thispagestyle{empty}\setcounter{page}{1}
+\let\footnotesize\small \let\footnoterule\relax
+\noindent\rule{\textwidth}{1.5pt}
+\vskip 1em
+\begin{center}
+{\Huge \@title \par}
+\vskip 1em
+\rule{\textwidth}{1.5pt} \par \nobreak
+\vskip 4em
+{\large THESIS}
+\vskip 2em
+{\large submitted in partial fulfillment of the \\
+requirements for the degree of }
+\vskip 2em
+{\large \@REPTYPE}
+\vskip 2em
+in
+\vskip 2em
+{\large \@MAJOR}
+\vskip 2em
+by
+\vskip 2em 
+{\large \begin{tabular}[t]{c}
+\@author \\
+born in \@birthplace{}
+\end{tabular}}
+\vfill
+\ifcompany@defined 
+  \end{center}
+  \begin{tabular}{@{}l@{}r@{}}
+    \begin{minipage}[b]{.54\textwidth}\@university\end{minipage} & 
+    \begin{minipage}[b]{.46\textwidth}\flushright\@company\end{minipage}
+  \end{tabular}
+\else
+  \@university
+  \end{center}
+\fi
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\vfill
+\@colophon{}
+\cleardoublepage
+\thispagestyle{empty}\setcounter{page}{1}
+\noindent\rule{\textwidth}{1.5pt}
+\begin{center}
+  {\Huge \@title \par}
+\end{center}
+\noindent\rule{\textwidth}{1.5pt}
+\vskip 3em
+
+\noindent\begin{tabular}{@{}ll@{}}
+\\
+Author: & \@author \\
+Student id: & \@studentid \\
+Email: & \@authoremail \\
+\end{tabular}
+\vskip 3em
+
+\begin{abstract}#1\end{abstract}
+
+\vfill
+
+\noindent\begin{tabular}{@{}ll@{}}
+\\
+\input{000-committee}
+\\\\\\\end{tabular}
+\cleardoublepage\endgroup
+}
+
+
+
+
