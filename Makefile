@@ -40,6 +40,9 @@ clean-bib:
 clean: clean-bib
 	rm -rf $(OUTDIR)/
 	rm -f *.pdf
+	rm -f *.aux
+	rm -f *.fdb_latexmk
+	rm -f *.fls
 
 show: view
 view: all
