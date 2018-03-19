@@ -5,6 +5,13 @@
 2. Install Biber.
 
 
+## Citations
+This template uses Biblatex.  To use a citation between parentheses, use
+`\autocite` (for one citation) or `\autocites` (for more than one citation).
+To use a citation in running text, use `\textcite`.  Change the citation style
+in `document.sty`.  See the [Biblatex documentation][1] for more information.
+
+
 ## Subset of pages
 To create a subset of pages (for review for example), install `stapler`.
 The syntax is:
@@ -37,3 +44,7 @@ The template has the following direct package dependencies:
 - [xcolor](https://ctan.org/pkg/xcolor) - Color extensions
 - [xltxtra](https://ctan.org/pkg/xltxtra) - Latex extras
 - [xunicode](https://ctan.org/pkg/xunicode) - Unicode support
+
+
+
+[1]: http://ctan.triasinformatica.nl/macros/latex/contrib/biblatex/doc/biblatex.pdf
