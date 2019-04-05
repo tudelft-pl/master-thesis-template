@@ -1,7 +1,7 @@
 # Master Thesis Template
 
 ## Setup
-1. Install the full TexLive distribution.
+1. Install the full TexLive distribution, including XeLaTeX.
 2. Install Biber.
 
 
@@ -42,7 +42,7 @@ The template has the following direct package dependencies:
 - [xargs](https://ctan.org/pkg/xargs) - Define commands with many optional arguments
 - [xassoccnt](https://ctan.org/pkg/xassoccnt) - Counters
 - [xcolor](https://ctan.org/pkg/xcolor) - Color extensions
-- [xltxtra](https://ctan.org/pkg/xltxtra) - Latex extras
+- [xltxtra](https://ctan.org/pkg/xltxtra) - XeLaTeX extras
 - [xunicode](https://ctan.org/pkg/xunicode) - Unicode support
 
 
