@@ -5,11 +5,16 @@
 2. Install Biber.
 
 
-## Citations
+## References and Citations
 This template uses Biblatex.  To use a citation between parentheses, use
 `\autocite` (for one citation) or `\autocites` (for more than one citation).
 To use a citation in running text, use `\textcite`.  Change the citation style
 in `document.sty`.  See the [Biblatex documentation][1] for more information.
+
+Manage your references using [researchr.org][2].  To set this up: create a new bibliography,
+copy the identifier (such as `b0402c72-980f-6580-6b0e-7a614ed2d64c-master-thesis`) from the URL,
+and paste the identifier in your `Makefile` as the value of the `RESEARCHR` variable.
+Executing `make bib` will download the latest bibliography from Researchr.
 
 
 ## Subset of pages
@@ -48,3 +53,4 @@ The template has the following direct package dependencies:
 
 
 [1]: http://ctan.triasinformatica.nl/macros/latex/contrib/biblatex/doc/biblatex.pdf
+[2]: https://researchr.org/
