@@ -1,0 +1,51 @@
+{
+  "editor.wordWrap": "off",
+  "editor.wordWrapColumn": 100,
+  "editor.rulers": [100, 120],
+  "[latex]": {
+      "editor.wordWrap": "wordWrapColumn",
+      "editor.wordWrapColumn": 80,
+      "editor.renderWhitespace": "all",
+      "editor.tabSize": 2,
+      "editor.insertSpaces": true,
+      "editor.detectIndentation": false
+  },
+  "files.exclude": {
+      "out/": true,
+      ".~lock.document.pdf#": true,
+      ".refresh": true,
+      "**/*.aux": true,
+      "**/*.fls": true,
+      "**/*.fdb_latexmk": true,
+      "**/*.log": true
+  },
+  "editor.wordBasedSuggestions": false,
+  "latex-workshop.latex.recipes": [
+      {
+          "name": "make",
+          "tools": [
+            "make"
+          ]
+      }
+  ],
+  "latex-workshop.latex.tools": [
+      {
+          "name": "make",
+          "command": "make",
+          "args": [
+             "-C",
+             "%DIR%/../"
+          ]
+      }
+  ],
+  "latex-workshop.chktex.args.active": [
+      "-wall",
+      "-n22",
+      "-n30",
+      "-n46",
+      "-e16",
+      "-q"
+  ],
+  "latex-workshop.latex.outDir": "../",
+  "html.format.wrapLineLength": 100
+}
