@@ -1,7 +1,10 @@
 LATEXMK    = latexmk
-LATEXMKOPT = -xelatex -shell-escape
+LATEXMKOPT = -xelatex -bibtex -shell-escape -synctex=1 -interaction=nonstopmode -file-line-error
+CONTINUOUS = -pvc -view=default -halt-on-error
 
-MAIN       := document
+DOCUMENT   := document
+OUTPUT     := $(DOCUMENT)
+RESEARCHR  := b0402c72-980f-6580-6b0e-7a614ed2d64c-master-thesis
 SRCDIR     := src
 FIGDIR     := src/fig
 IMGDIR     := src/img
@@ -14,36 +17,67 @@ OBJS       := $(wildcard $(OUTDIR)/*.aux) $(wildcard $(OUTDIR)/*.bbl) $(wildcard
 
 .PHONY: all clean .refresh view show bib clean-bib
 
-all: $(MAIN).pdf
+all: $(DOCUMENT).pdf
 
 .refresh:
 	touch .refresh
 
-$(MAIN).pdf: .refresh $(SRCS)
+$(DOCUMENT).pdf: .refresh $(SRCS)
 	mkdir -p ../$(OUTDIR)/
 	cd $(SRCDIR)/ && \
 		$(LATEXMK) $(LATEXMKOPT) \
 			-output-directory=../$(OUTDIR) \
-			$(MAIN)
-	cp $(OUTDIR)/$(MAIN).pdf $(MAIN).pdf
+			$(DOCUMENT)
+	mv $(OUTDIR)/$(DOCUMENT).pdf $(OUTPUT).pdf
+	-mv $(OUTDIR)/$(DOCUMENT).vtc $(OUTPUT).vtc
+	-mv $(OUTDIR)/$(DOCUMENT).synctex.gz $(OUTPUT).synctex.gz
 
-bib: clean-bib $(SRCBIB)
+watch:
+	mkdir -p ../$(OUTDIR)/
+	cd $(SRCDIR)/ && \
+		$(LATEXMK) $(LATEXMKOPT) $(CONTINUOUS) \
+			-output-directory=../$(OUTDIR) \
+			$(DOCUMENT)
+
+bib: clean-bib $(SRCBIB) fix-bib
 
 $(SRCBIB):
-	curl https://researchr.org/downloadbibtex/bibliography/b0402c72-980f-6580-6b0e-7a614ed2d64c-master-thesis/compact -o $(SRCBIB)
-	sed -i '1 s/^/% /' $(SRCBIB)
+	curl https://researchr.org/downloadbibtex/bibliography/$(RESEARCHR)/compact -o $(SRCBIB)
 
+fix-bib: $(SRCBIB)
+	sed -i '' '1 s/^/% /' $(SRCBIB)
+	sed -i '' 's/doi = {http.*\/\(10\..*\)}/doi = {\1}/' $(SRCBIB)
+	sed -i '' '/doi = {http.*}/d' $(SRCBIB)
 
 clean-bib:
 	rm -f $(SRCBIB)
 
 clean: clean-bib
 	rm -rf $(OUTDIR)/
-	rm -f *.pdf
 	rm -f *.aux
+	rm -f *.bbl
+	rm -f *.blg
 	rm -f *.fdb_latexmk
 	rm -f *.fls
+	rm -f *.log
+	rm -f *.out
+	rm -f *.pdf
+	rm -f *.swp
+	rm -f *.synctex.gz
+	rm -f *.vtc
+	rm -f src/*.aux
+	rm -f src/*.bbl
+	rm -f src/*.blg
+	rm -f src/*.fdb_latexmk
+	rm -f src/*.fls
+	rm -f src/*.log
+	rm -f src/*.out
+	rm -f src/*.pdf
+	rm -f src/*.swp
+	rm -f src/*.synctex.gz
+	rm -f src/*.vtc
+
 
 show: view
 view: all
-	xdg-open $(MAIN).pdf
+	open $(OUTPUT).pdf
