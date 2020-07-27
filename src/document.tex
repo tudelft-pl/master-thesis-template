@@ -1,4 +1,16 @@
 \RequirePackage{snapshot}
+% Fix for snapshot package: https://tex.stackexchange.com/a/508995
+\makeatletter
+\def\snap@providesfile#1[#2]{%
+  \wlog{File: #1 #2}%
+  \if\expandafter\snap@graphic@test\expanded{#2}@@\@nil
+    \snap@record@graphic#1\relax #2 (type ??)\@nil
+  \else
+    \expandafter\xdef\csname ver@#1\endcsname{#2}%
+  \fi
+  \endgroup
+}
+\makeatother
 \documentclass[twoside,a4paper,11pt]{memoir}
 \usepackage{document}
 
