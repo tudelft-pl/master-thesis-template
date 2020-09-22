@@ -4,6 +4,13 @@
 1. Install the full TexLive distribution, including XeLaTeX.
 2. Install Biber.
 
+## Usage
+From the command line:
+
+    make
+
+From [VS Code][3], use the [TeX Workshop][4] extension.
+
 
 ## References and Citations
 This template uses Biblatex.  To use a citation between parentheses, use
@@ -54,3 +61,5 @@ The template has the following direct package dependencies:
 
 [1]: http://ctan.triasinformatica.nl/macros/latex/contrib/biblatex/doc/biblatex.pdf
 [2]: https://researchr.org/
+[3]: https://code.visualstudio.com/
+[4]: https://marketplace.visualstudio.com/items?itemName=Jeff-Tian.tex-workshop
