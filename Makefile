@@ -42,7 +42,7 @@ watch:
 bib: clean-bib $(SRCBIB) fix-bib
 
 $(SRCBIB):
-	curl https://researchr.org/downloadbibtex/bibliography/$(RESEARCHR)/compact -o $(SRCBIB)
+	curl https://researchr.org/downloadbibtex/bibliography/$(RESEARCHR)/ -o $(SRCBIB)
 
 fix-bib: $(SRCBIB)
 	sed -i '' '1 s/^/% /' $(SRCBIB)
